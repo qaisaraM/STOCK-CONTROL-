@@ -196,7 +196,7 @@ project/
 
 ## 📸 Screenshots
 
-Add images in `/screenshots` folder:
+Images in `/screenshots` folder:
 
 * Login (Face Detection)
 * Dashboard
