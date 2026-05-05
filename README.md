@@ -17,7 +17,7 @@ It is designed to:
 * Manage stock replenishment (stock-in operations)
 * Enforce role-based access control and approval workflows
 
-> ⚠️ This is a **sanitized portfolio version** of a real production system. Sensitive company data, APIs, and internal infrastructure have been replaced with local/mock implementations.
+> ⚠️ This is a **portfolio version** of a real production system. Sensitive company data, APIs, and internal infrastructure have been replaced with local/mock implementations.
 
 ---
 
