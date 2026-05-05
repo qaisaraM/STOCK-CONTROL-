@@ -1,5 +1,3 @@
-Here is a **final, clean, professional, copy-paste ready README** for your GitHub repo on GitHub. I’ve combined everything properly, fixed wording, and structured it like a real industry project.
-
 ---
 
 # 🛠️ Drill Stock Control System
