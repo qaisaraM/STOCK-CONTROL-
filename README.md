@@ -1,3 +1,7 @@
+Here is a **final, clean, professional, copy-paste ready README** for your GitHub repo on GitHub. I’ve combined everything properly, fixed wording, and structured it like a real industry project.
+
+---
+
 # 🛠️ Drill Stock Control System
 
 A desktop-based inventory management system for tracking precision drill stock, usage, and approval workflows in a controlled production environment.
@@ -6,28 +10,28 @@ A desktop-based inventory management system for tracking precision drill stock, 
 
 ## 📌 Overview
 
-This application is built using Python and PyQt5 to manage stock operations for precision drills across multiple categories and user roles.
+The Drill Stock Control System is built using Python and PyQt5 to manage inventory operations for precision cutting tools used in production.
 
-The system helps teams:
+It is designed to:
 
 * Track stock levels accurately
-* Monitor usage (stock out)
-* Manage stock replenishment (stock in)
-* Control access through role-based permissions
+* Monitor usage (stock-out operations)
+* Manage stock replenishment (stock-in operations)
+* Enforce role-based access control and approval workflows
 
-> ⚠️ This is a **sanitized portfolio version** of a production system. All sensitive data, APIs, and company-specific details have been removed or replaced with mock/local implementations.
+> ⚠️ This is a **sanitized portfolio version** of a real production system. Sensitive company data, APIs, and internal infrastructure have been replaced with local/mock implementations.
 
 ---
 
 ## 🧩 Product Scope
 
-The system manages approximately **301 types of drills**, categorized into:
+The system manages approximately **301 types of drill tools**, categorized into:
 
-* ADRL
-* ADR
-* Endmill
+* ADRL series
+* ADR series
+* Endmill series
 
-### Example Drill Specification
+### 📌 Example Drill Specification
 
 * Model Number: ADRSL-0003
 * Diameter: φ 0.03
@@ -39,29 +43,29 @@ The system manages approximately **301 types of drills**, categorized into:
 
 ## 🎯 Core Features
 
-### 📥 Stock In
+### 📥 Stock In (Inventory Addition)
 
-* Add new inventory items
-* Record purchase entries
-* Managed by authorized personnel (PIC)
+* Add new drill items into the system
+* Record purchase and restock entries
+* Restricted to authorized personnel (PIC role)
 
-### 📤 Stock Out
+### 📤 Stock Out (Usage Tracking)
 
-* Track usage of drills
-* Maintain accurate deduction of stock
-* Performed by authorized users
+* Track consumption of drills in production
+* Automatically update inventory levels
+* Controlled access based on user role
 
 ### 📊 Inventory Management
 
 * Real-time stock tracking
-* Drill categorization and filtering
-* Low stock monitoring
+* Drill categorization (ADRL / ADR / Endmill)
+* Low-stock monitoring for replenishment planning
 
 ### 🧾 Request & Approval Workflow
 
 * Users can submit stock requests
-* Approval required before processing
-* Ensures controlled purchasing decisions
+* Approver validates and approves/rejects requests
+* Ensures controlled and traceable procurement process
 
 ---
 
@@ -71,58 +75,91 @@ The system manages approximately **301 types of drills**, categorized into:
 
 * Approves stock requests
 * Approves guest access requests
-* Oversees system operations
+* Oversees system-wide inventory control
+
+---
 
 ### 👨‍🔧 PIC (Person In Charge)
 
-* Performs stock-in operations
-* Creates purchase requests
-* Manages inventory updates
+* Handles stock-in operations
+* Creates purchase and replenishment entries
+* Maintains inventory accuracy
+
+---
 
 ### 👷 User
 
+* Internal production team member
 * Authenticated via face detection
-* Allowed to perform stock-out only
+* Allowed only to perform stock-out operations
+
+---
 
 ### 👤 Guest
 
-* External users from other departments
+* External or non-team users
 * Must register and request access
-* Requires approval before gaining user privileges
+* Requires approval before becoming a system user
 
 ---
 
 ## 🔐 Authentication & Security
 
-* Face detection login for internal users
-* Role-based access control
+* Face detection-based login for internal users
+* Role-based access control (RBAC)
 * Approval-based onboarding for new users
+* Secure separation of user permissions
 
 ---
 
 ## 🛠️ Tech Stack
 
 * Python
-* PyQt5 (Desktop UI)
-* OpenCV (Face Detection)
-* SQLite (Local Database)
+* PyQt5 (Desktop UI Framework)
+* OpenCV (Face Detection Authentication)
+* Pandas / OpenPyXL (Excel file handling)
+* Microsoft SharePoint (file-based storage system)
+
+---
+
+## 📁 Data Storage Architecture
+
+Instead of a traditional database, the system uses **Excel files as structured storage units**.
+
+Each module is separated into independent Excel files to ensure:
+
+* No merge conflicts in shared environment
+* Easier auditing and traceability
+* Modular data management
+
+### 📂 SharePoint Structure
+
+```bash id="g7x2kp"
+SharePoint / StockSystem /
+│
+├── stock_master.xlsx        # Master drill inventory (301 types)
+├── stock_in.xlsx            # Stock-in transaction logs
+├── stock_out.xlsx           # Stock-out usage records
+├── user_access.xlsx         # User roles and permissions
+├── approval_requests.xlsx   # Stock request workflow
+```
 
 ---
 
 ## 📁 Project Structure
 
-```bash
+```bash id="p9v2xq"
 project/
 │
 ├── app/
-│   ├── ui/            # UI components (PyQt)
-│   ├── controllers/   # Business logic
-│   ├── services/      # Data handling
-│   └── models/        # Data structures
+│   ├── ui/            # PyQt5 UI components
+│   ├── controllers/   # Business logic layer
+│   ├── services/      # Excel data handling logic
+│   └── models/       # Data structures
 │
 ├── assets/            # Icons, images
-├── screenshots/       # README visuals
-├── main.py
+├── screenshots/       # UI screenshots
+├── main.py            # Application entry point
 ├── requirements.txt
 └── README.md
 ```
@@ -131,26 +168,38 @@ project/
 
 ## 📸 Screenshots
 
-(Add images in `/screenshots` folder)
+Add images inside `/screenshots` folder.
 
-Suggested:
+Recommended views:
 
-* Login (face detection)
-* Dashboard
+* Login (Face Detection screen)
+* Main Dashboard
 * Stock In / Stock Out interface
-* Approval panel
+* Approval workflow panel
+* Inventory overview
 
 ---
 
 ## ▶️ Demo
 
-(Optional: Add a short demo video or GIF showing system workflow)
+(Optional but recommended)
+
+Add:
+
+* Screen recording (MP4 / GIF)
+* Or YouTube unlisted demo link
+
+Show:
+
+* Login flow
+* Stock transaction
+* Approval process
 
 ---
 
 ## ⚙️ Installation
 
-```bash
+```bash id="m1k8rz"
 git clone https://github.com/your-username/drill-stock-control-system.git
 cd drill-stock-control-system
 pip install -r requirements.txt
@@ -159,33 +208,39 @@ python main.py
 
 ---
 
-## 🧠 What I Learned
+## 🧠 Key Learning Outcomes
 
-* Designing a role-based access control system
-* Implementing face recognition authentication
-* Handling real-world inventory workflows
-* Structuring a maintainable Python desktop application
-* Working under restricted environments (no external APIs)
+* Designing role-based access control (RBAC) systems
+* Implementing face recognition authentication in desktop applications
+* Managing file-based data architecture using Excel
+* Building production-like workflows in a constrained environment
+* Structuring scalable Python desktop applications
 
 ---
 
 ## ⚠️ Limitations
 
 * Runs locally (no cloud deployment)
-* Uses mock/local data instead of live company APIs
-* Face detection optimized for controlled environment only
+* Uses Excel instead of a relational database
+* Face detection requires controlled lighting/environment
+* Designed for internal/enterprise-style simulation only
 
 ---
 
 ## 🚀 Future Improvements
 
-* Convert to web-based system (React + API)
-* Add reporting and analytics dashboard
-* Improve UI/UX design
-* Integrate real-time database or cloud storage
+* Migrate Excel storage to database (SQLite/PostgreSQL)
+* Convert system into web application (React + API backend)
+* Improve face recognition accuracy and speed
+* Add analytics dashboard for inventory insights
+* Enable cloud-based synchronization via SharePoint API
 
 ---
 
 ## 📄 License
 
-This project is for educational and portfolio purposes only.
+This project is intended for **portfolio and educational purposes only**.
+
+---
+
+
