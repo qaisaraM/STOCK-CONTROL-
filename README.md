@@ -197,17 +197,6 @@ Show:
 
 ---
 
-## ⚙️ Installation
-
-```bash id="m1k8rz"
-git clone https://github.com/your-username/drill-stock-control-system.git
-cd drill-stock-control-system
-pip install -r requirements.txt
-python main.py
-```
-
----
-
 ## 🧠 Key Learning Outcomes
 
 * Designing role-based access control (RBAC) systems
