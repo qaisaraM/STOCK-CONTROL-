@@ -141,7 +141,7 @@ SharePoint / StockSystem /
 ├── Pending_employees.xlsx   # User / guest access requests
 
 ```
-> ⚠️ Excel files are stored externally in Microsoft SharePoint and are not included in this repository due to confidentiality and data sensitivity.
+> ⚠️ All transactional data is stored in Microsoft SharePoint using Excel-based modules for lightweight enterprise integration.
 ---
 
 ## 🧠 System Architecture
