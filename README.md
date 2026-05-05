@@ -10,12 +10,12 @@ A desktop-based inventory management system for tracking precision drill stock, 
 
 The Drill Stock Control System is built using Python and PyQt5 to manage inventory operations for precision cutting tools used in production.
 
-It is designed to:
+The system is designed to support:
 
-* Track stock levels accurately
-* Monitor usage (stock-out operations)
-* Manage stock replenishment (stock-in operations)
-* Enforce role-based access control and approval workflows
+* Accurate stock level tracking
+* Stock-out (usage) monitoring
+* Stock-in (replenishment) management
+* Role-based access control and approval workflows
 
 > ⚠️ This is a **portfolio version** of a real production system. Sensitive company data, APIs, and internal infrastructure have been replaced with local/mock implementations.
 
@@ -23,7 +23,7 @@ It is designed to:
 
 ## 🧩 Product Scope
 
-The system manages approximately **400 types of drill tools**, categorized into:
+The system manages approximately **301 types of drill tools**, categorized into:
 
 * ADRL series
 * ADR series
@@ -44,14 +44,14 @@ The system manages approximately **400 types of drill tools**, categorized into:
 ### 📥 Stock In (Inventory Addition)
 
 * Add new drill items into the system
-* Record purchase and restock entries
+* Record purchase and replenishment entries
 * Restricted to authorized personnel (PIC role)
 
 ### 📤 Stock Out (Usage Tracking)
 
 * Track consumption of drills in production
 * Automatically update inventory levels
-* Controlled access based on user role
+* Controlled access based on user roles
 
 ### 📊 Inventory Management
 
@@ -61,7 +61,7 @@ The system manages approximately **400 types of drill tools**, categorized into:
 
 ### 🧾 Request & Approval Workflow
 
-* Users can submit stock requests
+* Users submit stock requests
 * Approver validates and approves/rejects requests
 * Ensures controlled and traceable procurement process
 
@@ -97,7 +97,7 @@ The system manages approximately **400 types of drill tools**, categorized into:
 
 * External or non-team users
 * Must register and request access
-* Requires approval before becoming a system user
+* Requires approval before becoming an active user
 
 ---
 
@@ -105,7 +105,7 @@ The system manages approximately **400 types of drill tools**, categorized into:
 
 * Face detection-based login for internal users
 * Role-based access control (RBAC)
-* Approval-based onboarding for new users
+* Approval-based onboarding workflow
 * Secure separation of user permissions
 
 ---
@@ -113,47 +113,75 @@ The system manages approximately **400 types of drill tools**, categorized into:
 ## 🛠️ Tech Stack
 
 * Python
-* PyQt5 (Desktop UI Framework)
-* OpenCV (Face Detection Authentication)
-* Pandas / OpenPyXL (Excel file handling)
+* PyQt5 (Desktop GUI)
+* OpenCV (Face Recognition Authentication)
+* Pandas / OpenPyXL (Excel data handling)
 * Microsoft SharePoint (file-based storage system)
 
 ---
 
 ## 📁 Data Storage Architecture
 
-Instead of a traditional database, the system uses **Excel files as structured storage units**.
+Instead of a traditional database, the system uses **Excel files as a modular transactional data layer**.
 
-Each module is separated into independent Excel files to ensure:
-
-* No merge conflicts in shared environment
-* Easier auditing and traceability
-* Modular data management
+Each file represents a specific business function to ensure traceability and prevent data conflicts in a shared environment.
 
 ### 📂 SharePoint Structure
 
-```bash id="g7x2kp"
+```bash id="sp_final"
 SharePoint / StockSystem /
 │
-├── stock_master.xlsx        # Master drill inventory (301 types)
-├── stock_in.xlsx            # Stock-in transaction logs
-├── stock_out.xlsx           # Stock-out usage records
-├── user_access.xlsx         # User roles and permissions
-├── approval_requests.xlsx   # Stock request workflow
+├── stock_master.xlsx         # Master drill inventory (301 types)
+├── Orders.xlsx               # Stock-in orders & approval workflow
+├── Received.xlsx             # Stock received confirmation logs
+├── Stocks.xlsx               # Real-time stock balance & movement tracking
+│
+├── Namelist.xlsx            # User roles and permissions (RBAC)
+├── Pending_employees.xlsx   # User / guest access requests
 ```
+
+---
+
+## 🧠 System Architecture
+
+The system follows a **lightweight ERP-style workflow architecture** using Excel as a transactional data layer.
+
+### 🔄 Workflow Process
+
+```
+Order Request → Approval → Stock Received → Stock Update → Stock Usage
+```
+
+### 📊 Data Flow Design
+
+* Orders.xlsx → Handles stock requests & approvals
+* Received.xlsx → Confirms physical stock arrival
+* Stocks.xlsx → Maintains real-time inventory state
+* stock_master.xlsx → Reference catalog for all drill types
+
+---
+
+## 🧩 Design Philosophy
+
+This system was designed to replicate a real-world manufacturing inventory environment where:
+
+* Lightweight tools are preferred over full database systems
+* Shared file-based systems are used across departments
+* Traceability and auditability are critical
+* Role-based workflows control all operations
 
 ---
 
 ## 📁 Project Structure
 
-```bash id="p9v2xq"
+```bash id="proj_final"
 project/
 │
 ├── app/
-│   ├── ui/            # PyQt5 UI components
+│   ├── ui/            # PyQt5 interface components
 │   ├── controllers/   # Business logic layer
-│   ├── services/      # Excel data handling logic
-│   └── models/       # Data structures
+│   ├── services/      # Excel data processing layer
+│   └── models/        # Data structures
 │
 ├── assets/            # Icons, images
 ├── screenshots/       # UI screenshots
@@ -166,13 +194,11 @@ project/
 
 ## 📸 Screenshots
 
-Add images inside `/screenshots` folder.
+Add images in `/screenshots` folder:
 
-Recommended views:
-
-* Login (Face Detection screen)
-* Main Dashboard
-* Stock In / Stock Out interface
+* Login (Face Detection)
+* Dashboard
+* Stock In / Stock Out screens
 * Approval workflow panel
 * Inventory overview
 
@@ -182,7 +208,7 @@ Recommended views:
 
 (Optional but recommended)
 
-Add:
+Include:
 
 * Screen recording (MP4 / GIF)
 * Or YouTube unlisted demo link
@@ -199,9 +225,9 @@ Show:
 
 * Designing role-based access control (RBAC) systems
 * Implementing face recognition authentication in desktop applications
-* Managing file-based data architecture using Excel
-* Building production-like workflows in a constrained environment
-* Structuring scalable Python desktop applications
+* Building file-based data architectures using Excel
+* Designing real-world inventory workflows
+* Structuring production-style Python desktop applications
 
 ---
 
@@ -209,18 +235,18 @@ Show:
 
 * Runs locally (no cloud deployment)
 * Uses Excel instead of a relational database
-* Face detection requires controlled lighting/environment
-* Designed for internal/enterprise-style simulation only
+* Face recognition requires controlled environment conditions
+* Designed for internal enterprise simulation
 
 ---
 
 ## 🚀 Future Improvements
 
-* Migrate Excel storage to database (SQLite/PostgreSQL)
-* Convert system into web application (React + API backend)
+* Migrate Excel system to database (SQLite / PostgreSQL)
+* Convert into web application (React + API backend)
 * Improve face recognition accuracy and speed
 * Add analytics dashboard for inventory insights
-* Enable cloud-based synchronization via SharePoint API
+* Enable cloud synchronization via SharePoint API
 
 ---
 
@@ -229,5 +255,3 @@ Show:
 This project is intended for **portfolio and educational purposes only**.
 
 ---
-
-
