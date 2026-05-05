@@ -115,7 +115,7 @@ The system manages approximately **301 types of drill tools**, categorized into:
 * Python
 * PyQt5 (Desktop GUI)
 * OpenCV (Image processing)  
-* MTCNN (Face detection & alignment)  
+* MTCNN (face detection and alignment for authentication)
 * Pandas / OpenPyXL (Excel data handling)
 * Microsoft SharePoint (file-based storage system)
 
