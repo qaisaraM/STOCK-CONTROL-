@@ -23,7 +23,7 @@ It is designed to:
 
 ## 🧩 Product Scope
 
-The system manages approximately **301 types of drill tools**, categorized into:
+The system manages approximately **400 types of drill tools**, categorized into:
 
 * ADRL series
 * ADR series
