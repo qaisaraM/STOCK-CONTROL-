@@ -140,10 +140,8 @@ SharePoint / StockSystem /
 ├── Namelist.xlsx            # User roles and permissions (RBAC)
 ├── Pending_employees.xlsx   # User / guest access requests
 
-> ⚠️ Excel files are stored externally in Microsoft SharePoint and are not included in this repository due to confidentiality and data sensitivity.
-
 ```
-
+> ⚠️ Excel files are stored externally in Microsoft SharePoint and are not included in this repository due to confidentiality and data sensitivity.
 ---
 
 ## 🧠 System Architecture
