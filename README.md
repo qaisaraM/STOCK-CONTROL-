@@ -206,23 +206,6 @@ Images in `/screenshots` folder:
 
 ---
 
-## ▶️ Demo
-
-(Optional but recommended)
-
-Include:
-
-* Screen recording (MP4 / GIF)
-* Or YouTube unlisted demo link
-
-Show:
-
-* Login flow
-* Stock transaction
-* Approval process
-
----
-
 ## 🧠 Key Learning Outcomes
 
 * Designing role-based access control (RBAC) systems
