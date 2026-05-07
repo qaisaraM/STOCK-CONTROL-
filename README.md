@@ -1,242 +1,219 @@
----
+<div align="center">
 
-# 🛠️ Drill Stock Control System
+# ⚙️ Drill Stock Control System
 
-A desktop-based inventory management system for tracking precision drill stock, usage, and approval workflows in a controlled production environment.
+**AI-powered inventory management with facial recognition, multi-tier approvals & real-time sync**
+
+![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python&logoColor=white)
+![PyQt5](https://img.shields.io/badge/PyQt5-Desktop_UI-blue?style=flat-square)
+![OpenCV](https://img.shields.io/badge/OpenCV-Face_Recognition-orange?style=flat-square&logo=opencv)
+![Pandas](https://img.shields.io/badge/Pandas-Data_Processing-green?style=flat-square&logo=pandas)
+![facenet-pytorch](https://img.shields.io/badge/facenet--pytorch-MTCNN-purple?style=flat-square)
+![ReportLab](https://img.shields.io/badge/ReportLab-PDF_Generation-cyan?style=flat-square)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Analytics-green?style=flat-square)
+![win32com](https://img.shields.io/badge/win32com-Outlook_Email-red?style=flat-square)
+
+</div>
 
 ---
 
 ## 📌 Overview
 
-The Drill Stock Control System is built using Python and PyQt5 to manage inventory operations for precision cutting tools used in production.
+A production-grade desktop application for managing drill tool inventory in a manufacturing environment. Built with PyQt5, it features facial recognition login, a structured 2-tier order approval workflow, real-time multi-user file synchronization, automated email notifications, and a rich analytics dashboard — all backed by Excel files shared over a network drive.
 
-The system is designed to support:
-
-* Accurate stock level tracking
-* Stock-out (usage) monitoring
-* Stock-in (replenishment) management
-* Role-based access control and approval workflows
-
-> ⚠️ This is a **portfolio version** of a real production system. Sensitive company data, APIs, and internal infrastructure have been replaced with local/mock implementations.
+> Developed for Production Engineering department.
 
 ---
 
-## 🧩 Product Scope
+## ✨ Features
 
-The system manages approximately **301 types of drill tools**, categorized into:
-
-* ADRL series
-* ADR series
-* Endmill series
-
-### 📌 Example Drill Specification
-
-* Model Number: ADRSL-0003
-* Diameter: φ 0.03
-* Blade Length: 0.5 ℓ
-* Full Length: 38 L
-* Shank: φ 3
+| Feature | Description |
+|---|---|
+| 🔐 **Multi-Role Auth** | Face recognition (MTCNN + LBPH) for PE members; password login for PIC/Approvers; guest signup with approval queue |
+| 📦 **Stock Tracking** | Real-time stock in/out recording with safety stock alerts and automated low-stock email notifications |
+| ✅ **2-Tier Approvals** | Per-line-item approve/reject flow: Approver 1 → Approver 2 → auto PDF + email summary |
+| 📊 **Analytics Dashboard** | Interactive Matplotlib charts with hover tooltips and popup zoom: orders, cost trends, top-10 usage, type breakdown |
+| 🔄 **Multi-User Sync** | `QFileSystemWatcher` + 2-second polling keeps all open sessions in sync over a shared network path |
+| 📧 **Outlook Automation** | Automated notifications via `win32com` for every workflow event: submission, approval, delivery, guest registration |
 
 ---
 
-## 🎯 Core Features
+## 👥 User Roles
 
-### 📥 Stock In (Inventory Addition)
+### 🏭 PIC (Person In Charge)
+- Full drill database management (add/edit/delete)
+- Stock In and Stock Out recording
+- Order submission with cost estimation
+- Order history and delivery tracking
+- Full analytics access
 
-* Add new drill items into the system
-* Record purchase and replenishment entries
-* Restricted to authorized personnel (PIC role)
+### ✔ Approver 1
+- Review and approve/reject orders per line item
+- Notify Approver 2 on completion
+- Manage employee accounts and pending signups
 
-### 📤 Stock Out (Usage Tracking)
+### ✔✔ Approver 2
+- Final approval authority
+- Auto-generates PDF approval report
+- Broadcasts summary email to all stakeholders
 
-* Track consumption of drills in production
-* Automatically update inventory levels
-* Controlled access based on user roles
+### 👤 PE Member / User
+- Face scan login only
+- Stock Out recording
+- Stock Status view
 
-### 📊 Inventory Management
-
-* Real-time stock tracking
-* Drill categorization (ADRL / ADR / Endmill)
-* Low-stock monitoring for replenishment planning
-
-### 🧾 Request & Approval Workflow
-
-* Users submit stock requests
-* Approver validates and approves/rejects requests
-* Ensures controlled and traceable procurement process
-
----
-
-## 👥 User Roles & Permissions
-
-### ✅ Approver
-
-* Approves stock requests
-* Approves guest access requests
-* Oversees system-wide inventory control
+### 🧑‍💻 Guest
+- Limited access — stock status browse
+- Self-registration with Approver 1 email notification
 
 ---
 
-### 👨‍🔧 PIC (Person In Charge)
-
-* Handles stock-in operations
-* Creates purchase and replenishment entries
-* Maintains inventory accuracy
-
----
-
-### 👷 User
-
-* Internal production team member
-* Authenticated via face detection
-* Allowed only to perform stock-out operations
-
----
-
-### 👤 Guest
-
-* External or non-team users
-* Must register and request access
-* Requires approval before becoming an active user
-
----
-
-## 🔐 Authentication & Security
-
-* Face detection-based login for internal users
-* Role-based access control (RBAC)
-* Approval-based onboarding workflow
-* Secure separation of user permissions
-
----
-
-## 🛠️ Tech Stack
-
-* Python
-* PyQt5 (Desktop GUI)
-* OpenCV (Image processing)  
-* MTCNN (face detection and alignment for authentication)
-* Pandas / OpenPyXL (Excel data handling)
-* Microsoft SharePoint (file-based storage system)
-
----
-
-## 📁 Data Storage Architecture
-
-Instead of a traditional database, the system uses **Excel files as a modular transactional data layer**.
-
-Each file represents a specific business function to ensure traceability and prevent data conflicts in a shared environment.
-
-### 📂 SharePoint Structure
-
-```bash id="sp_final"
-SharePoint / StockSystem /
-│
-├── stock_master.xlsx         # Master drill inventory (301 types)
-├── Orders.xlsx               # Stock-in orders & approval workflow
-├── Received.xlsx             # Stock received confirmation logs
-├── Stocks.xlsx               # Real-time stock balance & movement tracking
-│
-├── Namelist.xlsx            # User roles and permissions (RBAC)
-├── Pending_employees.xlsx   # User / guest access requests
+## 🔄 Order Approval Workflow
 
 ```
-> ⚠️ All transactional data is stored in Microsoft SharePoint using Excel-based modules for lightweight enterprise integration.
+PIC identifies low stock
+        │
+        ▼
+PIC sets qty → submits order → emails Approver 1
+        │
+        ▼
+Approver 1: toggle approve/reject per item
+        │
+        ▼
+Approver 2: final decision
+        │
+        ▼
+Auto PDF report + email to all stakeholders
+        │
+        ▼
+PIC records delivery → stock auto-updated
+```
+
 ---
 
-## 🧠 System Architecture
+## 🛠 Tech Stack
 
-The system follows a **lightweight ERP-style workflow architecture** using Excel as a transactional data layer.
-
-### 🔄 Workflow Process
-
-```
-Order Request → Approval → Stock Received → Stock Update → Stock Usage
-```
-
-### 📊 Data Flow Design
-
-* Orders.xlsx → Handles stock requests & approvals
-* Received.xlsx → Confirms physical stock arrival
-* Stocks.xlsx → Maintains real-time inventory state
-* stock_master.xlsx → Reference catalog for all drill types
-
----
-
-## 🧩 Design Philosophy
-
-This system was designed to replicate a real-world manufacturing inventory environment where:
-
-* Lightweight tools are preferred over full database systems
-* Shared file-based systems are used across departments
-* Traceability and auditability are critical
-* Role-based workflows control all operations
+| Library | Purpose |
+|---|---|
+| `PyQt5` | Desktop UI framework |
+| `facenet-pytorch` | Face detection via MTCNN |
+| `OpenCV (cv2)` | Face recognition via LBPH |
+| `Pandas` | Data processing and Excel I/O |
+| `openpyxl` | Low-level Excel read/write |
+| `Matplotlib` | Analytics charts with hover tooltips |
+| `ReportLab` | PDF approval report generation |
+| `win32com` | Outlook email automation |
+| `torch` | Backend for MTCNN inference |
 
 ---
 
 ## 📁 Project Structure
 
-```bash id="proj_final"
-project/
-│
-├── app/
-│   ├── ui/            # PyQt5 interface components
-│   ├── controllers/   # Business logic layer
-│   ├── services/      # Excel data processing layer
-│   └── models/        # Data structures
-│
-├── assets/            # Icons, images
-├── screenshots/       # UI screenshots
-├── main.py            # Application entry point
-├── requirements.txt
-└── README.md
+```
+CODE/
+├── src/
+│   ├── ui/
+│   │   ├── gui.py            # Main window, login screens, role routing
+│   │   ├── pic.py            # PIC interface: dashboard, stock, orders, monitoring
+│   │   ├── user.py           # PE member interface: stock out & status
+│   │   └── sidebar_gui.py    # Shared sidebar window base class
+│   └── Function/
+│       ├── approval.py       # 2-tier approval dashboard + pages
+│       ├── face_enroll.py    # Face capture, MTCNN detection, LBPH training
+│       ├── stock_utils.py    # Excel I/O, safe write, data readers
+│       ├── sync_manager.py   # QFileSystemWatcher + poll-based multi-user sync
+│       ├── pdf.py            # ReportLab approval PDF generator
+│       └── mail.py           # Outlook automation via win32com
+├── main.py                   # Entry point
+└── _internal/DATA/
+    ├── Database_V2.xlsx      # Drill master data
+    ├── Orders.xlsx           # Order records
+    ├── Namelist.xlsx         # Employee roster
+    ├── Stocks.xlsx           # Transaction log
+    └── Faces/                # Enrolled face images + trainer.yml
 ```
 
 ---
 
-## 📸 Screenshots
+## 🚀 Getting Started
 
-Images in `/screenshots` folder:
+### Prerequisites
 
-* Login (Face Detection)
-* Dashboard
-* Stock In / Stock Out screens
-* Approval workflow panel
-* Inventory overview
+- Windows OS (required for Outlook automation via `win32com`)
+- Microsoft Outlook installed and configured
+- Python 3.8+
+- Webcam (for face recognition)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/drill-stock-control.git
+cd drill-stock-control
+
+# Install dependencies
+pip install PyQt5 pandas openpyxl matplotlib reportlab
+pip install opencv-contrib-python facenet-pytorch torch
+pip install pywin32
+
+# Run the application
+python main.py
+```
+
+### First Run Setup
+
+1. **Configure paths** — update `_get_base_dir()` in `stock_utils.py` and `face_enroll.py` to point to your shared network path or local `_internal/` folder.
+2. **Prepare Excel files** — ensure `Database_V2.xlsx`, `Namelist.xlsx`, `Orders.xlsx`, `Stocks.xlsx`, and `Received.xlsx` exist in `_internal/DATA/`.
+3. **Set role passwords** — update `ROLE_PASSWORDS` in `gui.py` (default: PIC=`1234`, Approver1=`1111`, Approver2=`2222`).
+4. **Enrol faces** — log in as a PIC and use Manage Employees → Add Employee → Enroll Face to register PE members.
 
 ---
 
-## 🧠 Key Learning Outcomes
+## 🔐 Default Login Credentials
 
-* Designing role-based access control (RBAC) systems
-* Implementing face recognition authentication in desktop applications
-* Building file-based data architectures using Excel
-* Designing real-world inventory workflows
-* Structuring production-style Python desktop applications
+| Role | Method | Default Password |
+|---|---|---|
+| PIC | Employee No + Password | `1234` |
+| Approver 1 | Employee No + Password | `1111` |
+| Approver 2 | Employee No + Password | `2222` |
+| PE Member | Face Scan | — |
+| Guest | Employee No (no password) | — |
 
----
-
-## ⚠️ Limitations
-
-* Runs locally (no cloud deployment)
-* Uses Excel instead of a relational database
-* Face recognition requires controlled environment conditions
-* Designed for internal enterprise simulation
+> ⚠️ Change default passwords before deployment.
 
 ---
 
-## 🚀 Future Improvements
+## 📊 Analytics Module
 
-* Migrate Excel system to database (SQLite / PostgreSQL)
-* Convert into web application (React + API backend)
-* Improve face recognition accuracy and speed
-* Add analytics dashboard for inventory insights
-* Enable cloud synchronization via SharePoint API
+The Monitoring page provides:
+
+- **Orders & Cost per Period** — dual-axis bar + line chart (Qty vs RM cost), switchable by year or custom date range
+- **Stock In / Out trends** — double bar chart showing Qty In vs Qty Out with Order Qty overlay
+- **Top 10 Drill Purchases** — horizontal bar chart by drill name, coloured by drill type
+- **Top 10 Drill Usage** — horizontal bar chart of highest Qty Out items
+- **Cost by Drill Type** — horizontal bar breakdown of total spend per type
+- **Order Detail Table** — filterable by month, drill type, and drill name
+
+All charts support double-click to open a full-screen popup with zoom/pan via Matplotlib's NavigationToolbar.
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ---
 
 ## 📄 License
 
-This project is intended for **portfolio and educational purposes only**.
+This project is proprietary software developed for internal use at YOKOWO Group.
 
 ---
+
+<div align="center">
+
+built with **PyQt5** · **OpenCV** · **facenet-pytorch** · **pandas**
+
+*Production Inventory Management System · QaisaraM*
+
+</div>
