@@ -1,3 +1,6 @@
+🔗 [View Source Code](https://github.com/qaisaraM/STOCK-CONTROL-SYSTEM)  
+🌐 [Live Demo](https://qaisaram.github.io/STOCK-CONTROL-SYSTEM/)
+
 <div align="center">
 
 # ⚙️ Drill Stock Control System
