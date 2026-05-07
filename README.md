@@ -135,40 +135,6 @@ CODE/
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Windows OS (required for Outlook automation via `win32com`)
-- Microsoft Outlook installed and configured
-- Python 3.8+
-- Webcam (for face recognition)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/drill-stock-control.git
-cd drill-stock-control
-
-# Install dependencies
-pip install PyQt5 pandas openpyxl matplotlib reportlab
-pip install opencv-contrib-python facenet-pytorch torch
-pip install pywin32
-
-# Run the application
-python main.py
-```
-
-### First Run Setup
-
-1. **Configure paths** — update `_get_base_dir()` in `stock_utils.py` and `face_enroll.py` to point to your shared network path or local `_internal/` folder.
-2. **Prepare Excel files** — ensure `Database_V2.xlsx`, `Namelist.xlsx`, `Orders.xlsx`, `Stocks.xlsx`, and `Received.xlsx` exist in `_internal/DATA/`.
-3. **Set role passwords** — update `ROLE_PASSWORDS` in `gui.py` (default: PIC=`1234`, Approver1=`1111`, Approver2=`2222`).
-4. **Enrol faces** — log in as a PIC and use Manage Employees → Add Employee → Enroll Face to register PE members.
-
----
-
 ## 🔐 Default Login Credentials
 
 | Role | Method | Default Password |
@@ -198,15 +164,11 @@ All charts support double-click to open a full-screen popup with zoom/pan via Ma
 
 ---
 
-## 🤝 Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 ---
 
 ## 📄 License
 
-This project is proprietary software developed for internal use at YOKOWO Group.
+This project is proprietary software and is presented here for portfolio purposes only.
 
 ---
 
