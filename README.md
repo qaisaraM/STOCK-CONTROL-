@@ -62,42 +62,7 @@ Precision drill tools are high-value, consumable inventory in a CNC machining en
 
 ## 2. System Architecture
 
-```
-┌─────────────────────────────────────────────────────┐
-│                  Authentication Layer                │
-│                                                     │
-│   Face Scan (MTCNN + LBPH)  │  Password Login       │
-│   PE Members                │  PIC / Approvers      │
-└──────────────────┬──────────────────────────────────┘
-                   │  role resolved
-                   ▼
-┌─────────────────────────────────────────────────────┐
-│                Role Router (gui.py)                  │
-│                                                     │
-│   PIC Interface   │  Approver UI  │  PE Member UI   │
-└──────┬────────────┴──────┬────────┴─────────────────┘
-       │                   │
-       ▼                   ▼
-┌──────────────┐   ┌───────────────────────────────┐
-│ stock_utils  │   │       approval.py              │
-│ Excel I/O    │   │  2-tier approve / reject flow  │
-│ Safe write   │   │  PDF generation + email        │
-└──────┬───────┘   └───────────────────────────────┘
-       │
-       ▼
-┌─────────────────────────────────────────────────────┐
-│               Shared Excel Data Store                │
-│  Database_V2.xlsx  │  Orders.xlsx  │  Stocks.xlsx   │
-│  Namelist.xlsx     │  Faces/       │                │
-└─────────────────────────────────────────────────────┘
-       │
-       ▼
-┌─────────────────────────────────────────────────────┐
-│           sync_manager.py (Multi-User Sync)          │
-│   QFileSystemWatcher + 2-second polling              │
-│   All open sessions stay consistent                  │
-└─────────────────────────────────────────────────────┘
-```
+![End-to-End Pipeline](https://github.com/qaisaraM/STOCK-CONTROL-SYSTEM/blob/main/docs/architecture.png)
 
 ---
 
