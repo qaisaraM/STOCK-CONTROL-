@@ -104,29 +104,7 @@ Each role loads a completely different UI module on login — there is no shared
 
 The approval workflow is the most complex subsystem. It mirrors a real procurement process with two independent authorisation levels and a full audit trail at each step.
 
-```
-1. PIC identifies low stock via dashboard alert
-          │
-          ▼
-2. PIC sets order quantities → submits order
-   → Automated email to Approver 1
-          │
-          ▼
-3. Approver 1 reviews each line item individually
-   → Approve or reject per item with remarks
-   → On completion: automated email to Approver 2
-          │
-          ▼
-4. Approver 2 performs final review
-   → Final approval or rejection
-   → Auto-generates PDF approval report (ReportLab)
-   → Broadcast email to all stakeholders (win32com)
-          │
-          ▼
-5. PIC records delivery against approved order
-   → Stock levels auto-updated
-   → Transaction logged with timestamp
-```
+![End-to-End Pipeline](https://github.com/qaisaraM/STOCK-CONTROL-SYSTEM/blob/main/docs/order_flow.png)
 
 ### Per-Item Approval
 
