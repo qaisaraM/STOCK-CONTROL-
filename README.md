@@ -72,19 +72,7 @@ The authentication layer uses two distinct mechanisms matched to user type.
 
 ### Face Recognition Login (PE Members)
 
-```
-Camera feed (OpenCV)
-        ↓
-MTCNN face detection (facenet-pytorch)
-        ↓
-Face crop + alignment
-        ↓
-LBPH recogniser (cv2.face.LBPHFaceRecognizer)
-        ↓
-Confidence threshold check
-        ↓
-Identity resolved → role granted
-```
+![End-to-End Pipeline](https://github.com/qaisaraM/STOCK-CONTROL-SYSTEM/blob/main/docs/authentication.png)
 
 MTCNN (Multi-Task Cascaded Convolutional Networks) handles detection and alignment; LBPH (Local Binary Patterns Histograms) performs the recognition. This combination was chosen for reliable performance on factory-floor hardware without a GPU requirement for inference.
 
